@@ -6,24 +6,18 @@ AWS Glue is a fully managed extract, transform, and load (ETL) service that make
 https://aws.amazon.com/glue/
 
 ## Prerequisites
-### Runnning the demo requires: 
+
 1) Python (python-2.7 is recommended).
 2) Boto3 AWS SDK library installed
 3) AWS API authentication tokens configured in development environment, e.g. with AWS command-line interface (aws configure).
 
-Detailed setup instuctions can be found e.g. here:
-https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-setup.html
-
 ## How to run the demo
 
-Clone source code to a convenient location in your development environment and execute. 
 ```
 $ git clone https://github.com/mtakanen/aws-glue-demo .
 $ cd glue-demo/src
 $ python glue_demo.py
 ```
-
-Demo is non-interactive. Progress and some interesting information is printed in stdout (terminal console). Some of the API calls to AWS are asynchronous. Script always waits for service processes to terminate as following stages depend on the previous results.
 
 ## Datasets
 Demo uses two different data sources:
@@ -52,5 +46,3 @@ As IAM policies and data resources are in place we start using actual Glue servi
 
 As a final stage we create ETL jobs for both datasets and run them. Each ETL job exctracts a dataset in the data catalogue, transforms it and finally loads the actual data in a S3 folder. We make simple trasformations: For dataset (1) ETL script requests a column type change, and for dataset (2) file format is conversed from json to csv. By default Glue generates as many output files as it has found input files.
 
-## Shortcomings
-The ETL scripts used in create_job() are actually genererated by AWS Glue service. ETL jobs similar to those in this demo were created in Glue Console with the same datasinks as demo uses. According to documentation it is possible to generate the ETL scripts with Boto3. Note 1: ETL scripts can only be run inside the Glue service due to dependencies to low level AWS libraries. Note 2: If DEMO_BUCKET_NAME is changed, connection_options = {"path": "s3://DEMO_BUCKET_NAME/data/output" in ETL scripts must be edited accordingly.
