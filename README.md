@@ -14,7 +14,7 @@ https://aws.amazon.com/glue/
 ## How to run the demo
 
 ```
-$ git clone https://github.com/mtakanen/aws-glue-demo .
+$ git clone  .
 $ cd glue-demo/src
 $ python glue_demo.py
 ```
